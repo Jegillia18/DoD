@@ -14,7 +14,7 @@ warning('off','all')
 
 set = [11:31,35:45,48:56,59:65,67,68,72,75,77,78,79,80];
 filename = 'DoD_moi_100.xlsx';
-moi_100 = []; %space allocation
+% moi_100 = []; %space allocation
 
 prompt = 'What is the muscle of interest? ';
 m_1 = input(prompt,'s'); 
@@ -76,8 +76,12 @@ moi_100 = abs(moi_100);
 
 %% Sheet rename
 
+SN = readmatrix('Sheetnames.xlsx');
+SN = string(SN);
+sheets = SN;
 writematrix(moi_100,filename,'Sheet',y);
 
+clear moi_100
 end
 
 
