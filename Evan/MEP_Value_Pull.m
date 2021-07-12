@@ -12,13 +12,36 @@ set = [10:31,35:45,48:56,59:65,67,68,72,75,77,78,79,80];
 for y = 1:length(set)
     p = set(y);
     
-     data = sprintf('691_P%d_pre_corticalexcitability-MCD data.xlsx',p);
-%% Setup the Import Options and import the data
+     data = sprintf('691_P%d_pre_corticalexcitability-MCD data_thenar.xlsx',p);
+     
+opts = spreadsheetImportOptions("NumVariables", 12);
+
+% Specify sheet and range
+opts.Sheet = "Averages";
+opts.DataRange = "A1:L352";
+
+% Specify column names and types
+opts.VariableNames = ["s", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11", "thenaravg"];
+opts.SelectedVariableNames = ["s", "thenaravg"];
+opts.VariableTypes = ["double", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "double"];
+
+% Specify variable properties
+opts = setvaropts(opts, ["Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11"], "WhitespaceRule", "preserve");
+opts = setvaropts(opts, ["Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11"], "EmptyFieldRule", "auto");
+
+% Import the data
+P10precorticalexcitabilityMCDdatathenar1 = readtable(data, opts, "UseExcel", false);
+
+
+%% Clear temporary variables
+clear opts
+
+
 opts = spreadsheetImportOptions("NumVariables", 22);
 
 % Specify sheet and range
 opts.Sheet = "Averages";
-opts.DataRange = "A353:V353";
+opts.DataRange = "A352:V353";
 
 % Specify column names and types
 opts.VariableNames = ["Var1", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11", "Var12", "Var13", "Var14", "Var15", "Var16", "Var17", "Var18", "Var19", "VarName20", "Var21", "VarName22"];
@@ -30,45 +53,47 @@ opts = setvaropts(opts, ["Var1", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7",
 opts = setvaropts(opts, ["Var1", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11", "Var12", "Var13", "Var14", "Var15", "Var16", "Var17", "Var18", "Var19", "VarName20", "Var21", "VarName22"], "EmptyFieldRule", "auto");
 
 % Import the data
-P10precorticalexcitabilityMCDdataS1 = readtable(data, opts, "UseExcel", false);
+P11precorticalexcitabilityMCDdatathenar = readtable(data, opts, "UseExcel", false);
 
 
 %% Clear temporary variables
 clear opts
- temp = str2double(table2array(P10precorticalexcitabilityMCDdataS1));
- Onset_Parameters(y,:) =  temp;
+ temp_al = table2array(P10precorticalexcitabilityMCDdatathenar1(2:end,:)); % A and L Columns
+ temp_tv = str2double(table2array(P11precorticalexcitabilityMCDdatathenar)); % T and V Columns
+
+ %Onset_Parameters(y,:) =  temp;
 
 
 %% Set up the Import Options and import the data
 opts = spreadsheetImportOptions("NumVariables", 12);
 
-% Specify sheet and range
-opts.Sheet = "Averages";
-opts.DataRange = "A2:L352";
-
-% Specify column names and types
-opts.VariableNames = ["s", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11", "wristExAvg"];
-opts.SelectedVariableNames = ["s", "wristExAvg"];
-opts.VariableTypes = ["double", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "double"];
-
-% Specify variable properties
-opts = setvaropts(opts, ["Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11"], "WhitespaceRule", "preserve");
-opts = setvaropts(opts, ["Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11"], "EmptyFieldRule", "auto");
-
-% Import the data
-P12precorticalexcitabilityMCDdata = readtable(data, opts, "UseExcel", false);
-
-temp2 = table2array(P12precorticalexcitabilityMCDdata);
+% % Specify sheet and range
+% opts.Sheet = "Averages";
+% opts.DataRange = "A2:L352";
+% 
+% % Specify column names and types
+% opts.VariableNames = ["s", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11", "wristExAvg"];
+% opts.SelectedVariableNames = ["s", "wristExAvg"];
+% opts.VariableTypes = ["double", "char", "char", "char", "char", "char", "char", "char", "char", "char", "char", "double"];
+% 
+% % Specify variable properties
+% opts = setvaropts(opts, ["Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11"], "WhitespaceRule", "preserve");
+% opts = setvaropts(opts, ["Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11"], "EmptyFieldRule", "auto");
+% 
+% % Import the data
+% P12precorticalexcitabilityMCDdata = readtable(data, opts, "UseExcel", false);
+% 
+% temp2 = table2array(P12precorticalexcitabilityMCDdata);
 
 
 %% Clear temporary variables
 clear opts
 
-time = temp2(:,1);
+time = temp_al(:,1);
 start = find(time==.015);
-waveform = temp2(:,2);
-MCD = temp(:,1);
-SD = temp(:,2);
+waveform = temp_al(:,2);
+MCD = temp_tv(2,1);
+SD = temp_tv(2,2);
 
 
 %MCD
@@ -139,7 +164,7 @@ filename = sprintf('P%d_MEP_Plot',p);
 cd Plots
 savefig(filename);
 close
-cd 'C:\Users\cs201470\Desktop\DoD Muscle Extraction'
+cd 'C:\Users\Jessica S. Gilliam\Documents\MATLAB\ShepherdCenter\DoD\Evan'
 
 try MCD_AUC = trapz(waveform(MCD_onset_index:MCD_offset_index));
 catch MCD_AUC = NaN;
