@@ -98,7 +98,7 @@ SD = temp_tv(2,2);
 
 %MCD
 for i = start:(length(waveform)-5) 
- if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD
+ if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD% && waveform(i+3) > MCD && waveform(i+4) > MCD
      MCD_onset_index = i;
      MCD_onset_time = time(i);
      break
@@ -113,7 +113,7 @@ if isnan(MCD_onset_index)
      MCD_offset_time = NaN;
 else
     for i = MCD_onset_index:(length(waveform)-5) 
-        if waveform(i) < MCD && waveform(i+1) < MCD && waveform(i+2) < MCD && waveform(i+3) < MCD && waveform(i+4) < MCD
+        if waveform(i) < MCD && waveform(i+1) < MCD && waveform(i+2) < MCD% && waveform(i+3) < MCD && waveform(i+4) < MCD
             MCD_offset_index = i;
             MCD_offset_time = time(i);
         break
@@ -126,7 +126,7 @@ end
 
 %2SD
 for i = start:(length(waveform)-5) 
- if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD && waveform(i+3) > SD && waveform(i+4) > SD
+ if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD% && waveform(i+3) > SD && waveform(i+4) > SD
      SD_onset_index = i;
      SD_onset_time = time(i);
      break
@@ -141,7 +141,7 @@ if isnan(SD_onset_index)
      SD_offset_time = NaN;
 else
     for i = SD_onset_index:(length(waveform)-5) 
-        if waveform(i) < SD && waveform(i+1) < SD && waveform(i+2) < SD && waveform(i+3) < SD && waveform(i+4) < SD
+        if waveform(i) < SD && waveform(i+1) < SD && waveform(i+2) < SD% && waveform(i+3) < SD && waveform(i+4) < SD
             SD_offset_index = i;
             SD_offset_time = time(i);
         break
@@ -164,7 +164,7 @@ filename = sprintf('P%d_MEP_Plot',p);
 cd Plots
 savefig(filename);
 close
-cd 'C:\Users\Jessica S. Gilliam\Documents\MATLAB\ShepherdCenter\DoD\Evan'
+cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
 
 try MCD_AUC = trapz(waveform(MCD_onset_index:MCD_offset_index));
 catch MCD_AUC = NaN;
