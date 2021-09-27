@@ -161,10 +161,10 @@ hold on
 yline(SD,'g--');
 
 filename = sprintf('P%d_MEP_Plot',p);
-cd Plots
+cd Plots_5
 savefig(filename);
 close
-cd 'C:\Users\Jessica S. Gilliam\Documents\MATLAB\ShepherdCenter\DoD\Evan'
+cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
 
 try MCD_AUC = trapz(waveform(MCD_onset_index:MCD_offset_index));
 catch MCD_AUC = NaN;
