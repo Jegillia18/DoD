@@ -97,7 +97,8 @@ SD = temp_tv(2,2);
 
 
 %MCD
-for i = start:(length(waveform)-5) 
+for i = start:(length(waveform)-5)
+    %Below written like: wave(1) > MCD value ----- wave(2)> MCD value
  if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD% && waveform(i+3) > MCD && waveform(i+4) > MCD
      MCD_onset_index = i;
      MCD_onset_time = time(i);
