@@ -14,11 +14,6 @@
 % Offset2: 5 consecutive points below MCD
 
 
-% Updates need to be made to MEP area under the curve,Duration,add excel
-% output file automation
-
-% ANY CHANGES: need to be copied over to method 3/4
-
 clear
 clc
 
