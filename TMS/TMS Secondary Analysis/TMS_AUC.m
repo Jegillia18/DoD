@@ -1,6 +1,6 @@
 
 
-p=30;
+p=30
 
 filename = sprintf('P%d_SUB_MEP_ACTIVE_RC',p);
 PRE_SUB = xlsread(filename,1);
