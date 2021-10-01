@@ -248,8 +248,8 @@ filename = sprintf('P%d_MEP_Plot',p);
 cd Plots_M2
 savefig(filename);
 close
-%cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
-cd 'C:\Users\Jessi\Documents\DoD\Evan'
+cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
+%cd 'C:\Users\Jessi\Documents\DoD\Evan'
 
 % MEP Area Under the Curve (AUC):
 % Area 1: Onset 1 – Offset 1
