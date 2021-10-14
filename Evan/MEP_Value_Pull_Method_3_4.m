@@ -170,7 +170,7 @@ else
     end
 end
 
-%MCD : Offset 2 for 3/5
+%MCD : Offset 2 for 3/5  
 if isnan(MCD_onset2_index)
      MCD_offset2_index = NaN;
      MCD_offset2_time = NaN;
