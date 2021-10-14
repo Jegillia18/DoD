@@ -126,7 +126,7 @@ if isnan(MCD_onset1_index)
 else
     B = 0;
     for i = MCD_onset1_index:(length(waveform)-5)
-        for f = i:(length(waveform)-5)
+        for f = i:(i+5)
             if waveform(f) < MCD
                 c = 1;
             else
@@ -137,7 +137,11 @@ else
                 break
             end
         end
-        break
+        if B>=3
+            break
+        else 
+            B = 0;
+        end
     end
          if B >= 3    
             MCD_offset1_index = f;
@@ -173,7 +177,7 @@ if isnan(MCD_onset2_index)
 else
     B = 0;
     for i = MCD_onset2_index:(length(waveform)-5)
-        for f = i:(length(waveform)-5)
+        for f = i:(i+5)
             if waveform(f) < MCD
                 c = 1;
             else
@@ -184,7 +188,11 @@ else
                 break
             end
         end
-        break
+        if B>=3
+            break
+        else 
+            B = 0;
+        end
     end
          if B >= 3    
             MCD_offset2_index = f;
@@ -215,7 +223,7 @@ if isnan(SD_onset1_index)
 else
     B = 0;
     for i = SD_onset1_index:(length(waveform)-5)
-        for f = i:(length(waveform)-5)
+        for f = i:(i+5)
             if waveform(f) < SD
                 c = 1;
             else
@@ -226,7 +234,11 @@ else
                 break
             end
         end
-        break
+        if B>=3
+            break
+        else
+            B = 0;
+        end
     end
          if B >= 3    
             SD_offset1_index = f;
@@ -261,7 +273,7 @@ if isnan(SD_onset2_index)
 else
     B = 0;
     for i = SD_onset2_index:(length(waveform)-5)
-        for f = i:(length(waveform)-5)
+        for f = i:(i+5)
             if waveform(f) < SD
                 c = 1;
             else
@@ -272,7 +284,11 @@ else
                 break
             end
         end
-        break
+        if B>=3
+            break
+        else
+            B = 0;
+        end
     end
          if B >= 3    
             SD_offset2_index = f;
