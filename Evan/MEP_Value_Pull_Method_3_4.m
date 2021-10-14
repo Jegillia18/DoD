@@ -109,7 +109,7 @@ SD = temp_tv(2,2);
 %MCD : Onset 1 
 for i = start:(length(waveform)-5)
     %Below written like: wave(1) > MCD value ----- wave(2)> MCD value
- if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD
+ if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD % Shorten here for 3 consecutive or 5 consecutive
      MCD_onset1_index = i;
      MCD_onset1_time = time(i);
      break
@@ -126,13 +126,13 @@ if isnan(MCD_onset1_index)
 else
     B = 0;
     for i = MCD_onset1_index:(length(waveform)-5)
-        for f = i:(i+5)
+        for f = i:(i+5) % cycles through here, window of 5 for the entire waveform
             if waveform(f) < MCD
                 c = 1;
             else
                 c = 0;
             end
-            B = B+c;
+            B = B+c; % if there are 3 in the total 5, continues to identification of index and time
             if B>=3
                 break
             end
@@ -147,7 +147,7 @@ else
             MCD_offset1_index = f;
             MCD_offset1_time = time(f);
          else
-            MCD_offset1_index = NaN;
+            MCD_offset1_index = NaN; %if no value is found in the rotating set of 5, establishes as a NaN variable 
             MCD_offset1_time = NaN; 
          end
 end
