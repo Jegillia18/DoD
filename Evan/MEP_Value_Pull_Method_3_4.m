@@ -144,6 +144,7 @@ else
         end
     end
          if B >= 3    
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (below needs to change to i)            
             MCD_offset1_index = f;
             MCD_offset1_time = time(f);
          else
