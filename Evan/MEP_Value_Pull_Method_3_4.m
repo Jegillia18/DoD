@@ -143,10 +143,9 @@ else
             B = 0;
         end
     end
-         if B >= 3    
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (below needs to change to i)            
-            MCD_offset1_index = f;
-            MCD_offset1_time = time(f);
+         if B >= 3        
+            MCD_offset1_index = i;
+            MCD_offset1_time = time(i);
          else
             MCD_offset1_index = NaN; %if no value is found in the rotating set of 5, establishes as a NaN variable 
             MCD_offset1_time = NaN; 
@@ -196,8 +195,8 @@ else
         end
     end
          if B >= 3    
-            MCD_offset2_index = f;
-            MCD_offset2_time = time(f);
+            MCD_offset2_index = i;
+            MCD_offset2_time = time(i);
          else
             MCD_offset2_index = NaN;
             MCD_offset2_time = NaN; 
@@ -242,8 +241,8 @@ else
         end
     end
          if B >= 3    
-            SD_offset1_index = f;
-            SD_offset1_time = time(f);
+            SD_offset1_index = i;
+            SD_offset1_time = time(i);
          else
             SD_offset1_index = NaN;
             SD_offset1_time = NaN; 
@@ -292,8 +291,8 @@ else
         end
     end
          if B >= 3    
-            SD_offset2_index = f;
-            SD_offset2_time = time(f);
+            SD_offset2_index = i;
+            SD_offset2_time = time(i);
          else
             SD_offset2_index = NaN;
             SD_offset2_time = NaN; 
