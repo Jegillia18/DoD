@@ -126,14 +126,17 @@ if isnan(MCD_onset1_index)
 else
     B = 0;
     for i = MCD_onset1_index:(length(waveform)-5)
+        c = [];
+        d = 1;
         for f = i:(i+5) % cycles through here, window of 5 for the entire waveform
             if waveform(f) < MCD
-                c = 1;
+                c(d,:) = [f,1];
             else
-                c = 0;
+                c(d,:) = [f,0];
             end
-            B = B+c; % if there are 3 in the total 5, continues to identification of index and time
-            if B>=3
+            B = sum(c(:,2)); % if there are 3 in the total 5, continues to identification of index and time
+            d = d+1;
+            if d == 6 % To break out of the loop
                 break
             end
         end
@@ -143,12 +146,20 @@ else
             B = 0;
         end
     end
-         if B >= 3        
-            MCD_offset1_index = i;
-            MCD_offset1_time = time(i);
-         else
-            MCD_offset1_index = NaN; %if no value is found in the rotating set of 5, establishes as a NaN variable 
-            MCD_offset1_time = NaN; 
+    
+         if B>=3      
+            for g = 1:5 % to iterate through the matrix
+                c1 = c(g,2);
+                if c1 == 1 % cycling through to find the first value 
+                    MCD_offset1_index = c(g,1);
+                    MCD_offset1_time = time(c(g,1));
+                    break
+                else
+                    MCD_offset1_index = NaN; %if no value is found in the rotating set of 5, establishes as a NaN variable 
+                    MCD_offset1_time = NaN;
+                end
+            end
+                       
          end
 end
 
@@ -158,8 +169,8 @@ if isnan(MCD_offset1_index)
     MCD_onset2_time = NaN;
     
 else
-    for i = MCD_offset1_index: (length(waveform)-5)
-        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) < MCD && waveform(i+4) < MCD
+    for i = MCD_offset1_index:(length(waveform)-5)
+        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD
             MCD_onset2_index = i;
             MCD_onset2_time = time(i);
         break
@@ -177,14 +188,17 @@ if isnan(MCD_onset2_index)
 else
     B = 0;
     for i = MCD_onset2_index:(length(waveform)-5)
-        for f = i:(i+5)
+        c = [];
+        d = 1;
+        for f = i:(i+5) % cycles through here, window of 5 for the entire waveform
             if waveform(f) < MCD
-                c = 1;
+                c(d,:) = [f,1];
             else
-                c = 0;
+                c(d,:) = [f,0];
             end
-            B = B+c;
-            if B>=3
+            B = sum(c(:,2)); % if there are 3 in the total 5, continues to identification of index and time
+            d = d+1;
+            if d == 6 % To break out of the loop
                 break
             end
         end
@@ -194,12 +208,23 @@ else
             B = 0;
         end
     end
-         if B >= 3    
-            MCD_offset2_index = i;
-            MCD_offset2_time = time(i);
+    
+         if B>=3      
+            for g = 1:5 % to iterate through the matrix
+                c1 = c(g,2);
+                if c1 == 1 % cycling through to find the first value 
+                    MCD_offset2_index = c(g,1);
+                    MCD_offset2_time = time(c(g,1));
+                    break 
+                else
+                    MCD_offset2_index = NaN; %if no value is found in the rotating set of 5, establishes as a NaN variable 
+                    MCD_offset2_time = NaN;
+                end
+            end
          else
-            MCD_offset2_index = NaN;
-            MCD_offset2_time = NaN; 
+                MCD_offset2_index = NaN; %establishes as a NaN variable 
+                MCD_offset2_time = NaN;
+                       
          end
 end
 
@@ -223,29 +248,40 @@ if isnan(SD_onset1_index)
 else
     B = 0;
     for i = SD_onset1_index:(length(waveform)-5)
-        for f = i:(i+5)
+        c = [];
+        d = 1;
+        for f = i:(i+5) % cycles through here, window of 5 for the entire waveform
             if waveform(f) < SD
-                c = 1;
+                c(d,:) = [f,1];
             else
-                c = 0;
+                c(d,:) = [f,0];
             end
-            B = B+c;
-            if B>=3
+            B = sum(c(:,2)); % if there are 3 in the total 5, continues to identification of index and time
+            d = d+1;
+            if d == 6 % To break out of the loop
                 break
             end
         end
         if B>=3
             break
-        else
+        else 
             B = 0;
         end
     end
-         if B >= 3    
-            SD_offset1_index = i;
-            SD_offset1_time = time(i);
-         else
-            SD_offset1_index = NaN;
-            SD_offset1_time = NaN; 
+    
+         if B>=3      
+            for g = 1:5 % to iterate through the matrix
+                c1 = c(g,2);
+                if c1 == 1 % cycling through to find the first value 
+                    SD_offset1_index = c(g,1);
+                    SD_offset1_time = time(c(g,1));
+                    break
+                else
+                    SD_offset1_index = NaN; %if no value is found in the rotating set of 5, establishes as a NaN variable 
+                    SD_offset1_time = NaN;
+                end
+            end
+                       
          end
 end
 
@@ -273,29 +309,43 @@ if isnan(SD_onset2_index)
 else
     B = 0;
     for i = SD_onset2_index:(length(waveform)-5)
-        for f = i:(i+5)
+        c = [];
+        d = 1;
+        for f = i:(i+5) % cycles through here, window of 5 for the entire waveform
             if waveform(f) < SD
-                c = 1;
+                c(d,:) = [f,1];
             else
-                c = 0;
+                c(d,:) = [f,0];
             end
-            B = B+c;
-            if B>=3
+            B = sum(c(:,2)); % if there are 3 in the total 5, continues to identification of index and time
+            d = d+1;
+            if d == 6 % To break out of the loop
                 break
             end
         end
         if B>=3
             break
-        else
+        else 
             B = 0;
         end
     end
-         if B >= 3    
-            SD_offset2_index = i;
-            SD_offset2_time = time(i);
+    
+         if B>=3      
+            for g = 1:5 % to iterate through the matrix
+                c1 = c(g,2);
+                if c1 == 1 % cycling through to find the first value 
+                    SD_offset2_index = c(g,1);
+                    SD_offset2_time = time(c(g,1));
+                    break
+                else
+                    SD_offset2_index = NaN; %if no value is found in the rotating set of 5, establishes as a NaN variable 
+                    SD_offset2_time = NaN;
+                end
+            end
          else
-            SD_offset2_index = NaN;
-            SD_offset2_time = NaN; 
+                SD_offset2_index = NaN; %establishes as a NaN variable 
+                SD_offset2_time = NaN;
+                       
          end
 end
 
