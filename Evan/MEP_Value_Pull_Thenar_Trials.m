@@ -1,5 +1,5 @@
 %% Import data from spreadsheet
-% Script for importing data from the following spreadsheet:
+% 
 %
 %    Method 1:
 % Onset1: 3 consecutive points above MCD
@@ -20,7 +20,7 @@ clear
 clc
 
 set = [10:31,35:45,48:56,59:65,67,68,72,75,77,78,79,80];
-
+warning('off','all')
 
 for y = 1:length(set)
     p = set(y);
@@ -460,18 +460,18 @@ end
 
 
 % 
-% plot(time, waveform);
-% hold on
-% yline(MCD,'r--')
-% hold on
-% yline(SD,'g--');
-% 
-% filename = sprintf('P%d_MEP_Plot',p);
-% %cd Plots_M1
-% cd Plots_M2
-% savefig(filename);
-% close
-% cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
+plot(time, waveform);
+hold on
+yline(MCD,'r--')
+hold on
+yline(SD,'g--');
+
+filename = sprintf('P%d_Trial%d_MEP_Plot',p,h);
+cd Plots_M1
+%cd Plots_M2
+savefig(filename);
+close
+cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
 % %cd 'C:\Users\Jessi\Documents\DoD\Evan'
 
 
@@ -578,41 +578,53 @@ end
 
 
 MEP_Data.(['Participant_',num2str(p),]).('Trial')(L,1) = Trial;
-MEP_Data.(['Participant_',num2str(p),]).('MCD')(1,1) = MCD;
-MEP_Data.(['Participant_',num2str(p),]).('SD')(1,1) = SD;
+MEP_Data.(['Participant_',num2str(p),]).('MCD')(L,1) = MCD;
+MEP_Data.(['Participant_',num2str(p),]).('SD')(L,1) = SD;
 
-MEP_Data.(['Participant_',num2str(p),]).('MCD_onset1_time')(1,1) = MCD_onset1_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_offset1_time')(1,1) = MCD_offset1_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_onset2_time')(1,1) = MCD_onset2_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_offset2_time')(1,1) = MCD_offset2_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_onset3_time')(1,1) = MCD_onset3_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_offset3_time')(1,1) = MCD_offset3_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_onset4_time')(1,1) = MCD_onset4_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_offset4_time')(1,1) = MCD_offset4_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_onset5_time')(1,1) = MCD_onset5_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_offset5_time')(1,1) = MCD_offset5_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_offset5_time')(1,1) = MCD_offset5_time;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_offset5_time')(1,1) = MCD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset1_time')(L,1) = MCD_onset1_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset1_time')(L,1) = MCD_offset1_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset2_time')(L,1) = MCD_onset2_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset2_time')(L,1) = MCD_offset2_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset3_time')(L,1) = MCD_onset3_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset3_time')(L,1) = MCD_offset3_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset4_time')(L,1) = MCD_onset4_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset4_time')(L,1) = MCD_offset4_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset5_time')(L,1) = MCD_onset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset5_time')(L,1) = MCD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset5_time')(L,1) = MCD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset5_time')(L,1) = MCD_offset5_time;
 
-MEP_Data.(['Participant_',num2str(p),]).('SD_onset1_time')(1,1) = SD_onset1_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_offset1_time')(1,1) = SD_offset1_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_onset2_time')(1,1) = SD_onset2_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_offset2_time')(1,1) = SD_offset2_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_onset3_time')(1,1) = SD_onset3_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_offset3_time')(1,1) = SD_offset3_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_onset4_time')(1,1) = SD_onset4_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_offset4_time')(1,1) = SD_offset4_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_onset5_time')(1,1) = SD_onset5_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_offset5_time')(1,1) = SD_offset5_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_offset5_time')(1,1) = SD_offset5_time;
-MEP_Data.(['Participant_',num2str(p),]).('SD_offset5_time')(1,1) = SD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset1_time')(L,1) = SD_onset1_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset1_time')(L,1) = SD_offset1_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset2_time')(L,1) = SD_onset2_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset2_time')(L,1) = SD_offset2_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset3_time')(L,1) = SD_onset3_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset3_time')(L,1) = SD_offset3_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset4_time')(L,1) = SD_onset4_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset4_time')(L,1) = SD_offset4_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset5_time')(L,1) = SD_onset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset5_time')(L,1) = SD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset5_time')(L,1) = SD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset5_time')(L,1) = SD_offset5_time;
 
-MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC1')(1,1) = MCD_AUC1;
-MEP_Data.(['Participant_',num2str(p),]).('SD_AUC1')(1,1) = SD_AUC1;
-MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC2')(1,1) = MCD_AUC2;
-
-%%%%%%%%%%%% NEED to complete here
-
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC1')(L,1) = MCD_AUC1;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC1')(L,1) = SD_AUC1;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC2')(L,1) = MCD_AUC2;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC2')(L,1) = MCD_AUC2;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC1_2')(L,1) = MCD_AUC1_2;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC1_2')(L,1) = MCD_AUC1_2;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC3')(L,1) = MCD_AUC3;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC3')(L,1) = SD_AUC3;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC2_3')(L,1) = MCD_AUC2_3;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC2_3')(L,1) = SD_AUC2_3;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC4')(L,1) = MCD_AUC4;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC4')(L,1) = SD_AUC4;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC3_4')(L,1) = SD_AUC4;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC3_4')(L,1) = SD_AUC4;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC5')(L,1) = MCD_AUC5;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC5')(L,1) = SD_AUC5;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC4_5')(L,1) = MCD_AUC4_5;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC4_5')(L,1) = SD_AUC4_5;
 
 
 clearvars -except Parameters y p set set2 MEP_Data temp_al temp_tv

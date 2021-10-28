@@ -1,5 +1,5 @@
 %% Import data from spreadsheet
-% Script for importing data from the following spreadsheet:
+% 
 %
 %    Method 3:
 % Onset1: 3 consecutive points above MCD
@@ -19,10 +19,11 @@ clear
 clc
 
 set = [10:31,35:45,48:56,59:65,67,68,72,75,77,78,79,80];
+warning('off','all')
 
 for y = 1:length(set)
     p = set(y);
-    
+    MEP_Data.(['Participant_',num2str(p),]) = table();
      data = sprintf('691_P%d_pre_corticalexcitability-MCD data_thenar.xlsx',p);
      
 opts = spreadsheetImportOptions("NumVariables", 12);
@@ -102,11 +103,22 @@ clear opts
 
 time = temp_al(:,1);
 start = find(time==.015);
-waveform = temp_al(:,2);
 MCD = temp_tv(2,1);
 SD = temp_tv(2,2);
 
-
+set2 = [2 3 4 5 6 7 8 9 10 11];
+for L = 1:length(set2) %Thenar data trials
+    h = set2(L);
+    waveform = temp_al(:,h);
+    
+    
+    Trial = L;
+    
+    time = temp_al(:,1);
+    start = find(time==.015);
+    MCD = temp_tv(2,1);
+    SD = temp_tv(2,2);
+    
 %MCD : Onset 1 
 for i = start:(length(waveform)-5)
     %Below written like: wave(1) > MCD value ----- wave(2)> MCD value
@@ -198,6 +210,9 @@ else
                 c(d,:) = [f,0];
             end
             B = sum(c(:,2)); % if there are 3 in the total 5, continues to identification of index and time
+            if B>=3
+                break
+            end
             d = d+1;
             if d == 6 % To break out of the loop
                 break
@@ -236,6 +251,7 @@ if isnan(MCD_offset2_index)
     MCD_onset3_time = NaN;
     
 else
+    if (i+5) <= length(waveform)-5 % inserted to correct error when at the end of the waveform
     for i = MCD_offset2_index:(length(waveform)-5)
         if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD
             MCD_onset3_index = i;
@@ -245,6 +261,10 @@ else
             MCD_onset3_index = NaN;
             MCD_onset3_time = NaN;
         end
+    end
+    else
+        MCD_onset3_index = NaN;
+        MCD_onset3_time = NaN;  
     end
 end
 
@@ -302,6 +322,7 @@ if isnan(MCD_offset3_index)
     MCD_onset4_time = NaN;
     
 else
+    if (i+5) <= (length(waveform)-5)
     for i = MCD_offset3_index:(length(waveform)-5)
         if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD
             MCD_onset4_index = i;
@@ -311,6 +332,10 @@ else
             MCD_onset4_index = NaN;
             MCD_onset4_time = NaN;
         end
+    end
+    else
+        MCD_onset4_index = NaN;
+        MCD_onset4_time = NaN;
     end
 end
 
@@ -617,6 +642,7 @@ if isnan(SD_offset3_index)
      SD_onset4_index = NaN;
      SD_onset4_time = NaN; 
 else
+    if (i+5) <= 351-5
     for i = SD_offset3_index: (length(waveform)-5)
         if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD && waveform(i+3) > SD && waveform(i+4) > SD
          SD_onset4_index = i;
@@ -626,6 +652,10 @@ else
         SD_onset4_index = NaN;
         SD_onset4_time = NaN;
         end
+    end
+    else
+        SD_onset4_index = NaN;
+        SD_onset4_time = NaN;
     end
 end
 
@@ -760,19 +790,21 @@ end
 
 
 
-% 
-% plot(time, waveform);
-% hold on
-% yline(MCD,'r--')
-% hold on
-% yline(SD,'g--');
-% 
-% filename = sprintf('P%d_MEP_Plot',p);
-% cd Plots_M3
-% savefig(filename);
-% close
-% cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
+plot(time, waveform);
+hold on
+yline(MCD,'r--')
+hold on
+yline(SD,'g--');
+
+filename = sprintf('P%d_Trial%d_MEP_Plot',p,h);
+%cd Plots_M3
+cd Plots_M4
+savefig(filename);
+close
+cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
 % %cd 'C:\Users\Jessi\Documents\DoD\Evan'
+
+
 
 % MEP Area Under the Curve (AUC):
 % Area 1: Onset 1 – Offset 1
@@ -857,57 +889,104 @@ catch SD_AUC4_5 = NaN;
 end
 
 
-Parameters(y,:) = [p MCD SD MCD_onset1_time MCD_offset1_time MCD_onset2_time...
-    MCD_offset2_time MCD_onset3_time MCD_offset3_time MCD_onset4_time MCD_offset4_time MCD_onset5_time MCD_offset5_time...
-    SD_onset1_time SD_offset1_time SD_onset2_time SD_offset2_time SD_onset3_time SD_offset3_time SD_onset4_time SD_offset4_time SD_onset5_time SD_offset5_time...
-    MCD_AUC1 SD_AUC1 MCD_AUC2 SD_AUC2 MCD_AUC1_2 SD_AUC1_2 MCD_AUC3 SD_AUC3 MCD_AUC2_3 SD_AUC2_3 MCD_AUC4 SD_AUC4 MCD_AUC3_4 SD_AUC3_4 MCD_AUC5 SD_AUC5 MCD_AUC4_5 SD_AUC4_5];
 
-clearvars -except Parameters y set 
+MEP_Data.(['Participant_',num2str(p),]).('Trial')(L,1) = Trial;
+MEP_Data.(['Participant_',num2str(p),]).('MCD')(L,1) = MCD;
+MEP_Data.(['Participant_',num2str(p),]).('SD')(L,1) = SD;
+
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset1_time')(L,1) = MCD_onset1_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset1_time')(L,1) = MCD_offset1_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset2_time')(L,1) = MCD_onset2_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset2_time')(L,1) = MCD_offset2_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset3_time')(L,1) = MCD_onset3_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset3_time')(L,1) = MCD_offset3_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset4_time')(L,1) = MCD_onset4_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset4_time')(L,1) = MCD_offset4_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_onset5_time')(L,1) = MCD_onset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset5_time')(L,1) = MCD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset5_time')(L,1) = MCD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_offset5_time')(L,1) = MCD_offset5_time;
+
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset1_time')(L,1) = SD_onset1_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset1_time')(L,1) = SD_offset1_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset2_time')(L,1) = SD_onset2_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset2_time')(L,1) = SD_offset2_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset3_time')(L,1) = SD_onset3_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset3_time')(L,1) = SD_offset3_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset4_time')(L,1) = SD_onset4_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset4_time')(L,1) = SD_offset4_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_onset5_time')(L,1) = SD_onset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset5_time')(L,1) = SD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset5_time')(L,1) = SD_offset5_time;
+MEP_Data.(['Participant_',num2str(p),]).('SD_offset5_time')(L,1) = SD_offset5_time;
+
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC1')(L,1) = MCD_AUC1;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC1')(L,1) = SD_AUC1;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC2')(L,1) = MCD_AUC2;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC2')(L,1) = MCD_AUC2;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC1_2')(L,1) = MCD_AUC1_2;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC1_2')(L,1) = MCD_AUC1_2;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC3')(L,1) = MCD_AUC3;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC3')(L,1) = SD_AUC3;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC2_3')(L,1) = MCD_AUC2_3;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC2_3')(L,1) = SD_AUC2_3;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC4')(L,1) = MCD_AUC4;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC4')(L,1) = SD_AUC4;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC3_4')(L,1) = SD_AUC4;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC3_4')(L,1) = SD_AUC4;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC5')(L,1) = MCD_AUC5;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC5')(L,1) = SD_AUC5;
+MEP_Data.(['Participant_',num2str(p),]).('MCD_AUC4_5')(L,1) = MCD_AUC4_5;
+MEP_Data.(['Participant_',num2str(p),]).('SD_AUC4_5')(L,1) = SD_AUC4_5;
+
+
+clearvars -except Parameters y p set set2 MEP_Data temp_al temp_tv
 end
-
-
-%filename = 'Data_Method_3.xlsx';
-filename = 'Data_Method_4.xlsx';
-xlswrite(filename,Parameters(:,1),'Sheet1','A2')
-xlswrite(filename,Parameters(:,2),'Sheet1','B2')
-xlswrite(filename,Parameters(:,3),'Sheet1','C2')
-xlswrite(filename,Parameters(:,4),'Sheet1','D2')
-xlswrite(filename,Parameters(:,5),'Sheet1','E2')
-xlswrite(filename,Parameters(:,6),'Sheet1','F2')
-xlswrite(filename,Parameters(:,7),'Sheet1','G2')
-xlswrite(filename,Parameters(:,8),'Sheet1','H2')
-xlswrite(filename,Parameters(:,9),'Sheet1','I2')
-xlswrite(filename,Parameters(:,10),'Sheet1','J2')
-xlswrite(filename,Parameters(:,11),'Sheet1','K2')
-xlswrite(filename,Parameters(:,12),'Sheet1','L2')
-xlswrite(filename,Parameters(:,13),'Sheet1','M2')
-xlswrite(filename,Parameters(:,14),'Sheet1','N2')
-xlswrite(filename,Parameters(:,15),'Sheet1','O2')
-xlswrite(filename,Parameters(:,16),'Sheet1','P2')
-xlswrite(filename,Parameters(:,17),'Sheet1','Q2')
-xlswrite(filename,Parameters(:,18),'Sheet1','R2')
-
-xlswrite(filename,Parameters(:,19),'Sheet1','S2')
-xlswrite(filename,Parameters(:,20),'Sheet1','T2')
-xlswrite(filename,Parameters(:,21),'Sheet1','U2')
-xlswrite(filename,Parameters(:,22),'Sheet1','V2')
-xlswrite(filename,Parameters(:,23),'Sheet1','W2')
-xlswrite(filename,Parameters(:,24),'Sheet1','X2')
-xlswrite(filename,Parameters(:,25),'Sheet1','Y2')
-xlswrite(filename,Parameters(:,26),'Sheet1','Z2')
-xlswrite(filename,Parameters(:,27),'Sheet1','AA2')
-xlswrite(filename,Parameters(:,28),'Sheet1','AB2')
-xlswrite(filename,Parameters(:,29),'Sheet1','AC2')
-xlswrite(filename,Parameters(:,30),'Sheet1','AD2')
-xlswrite(filename,Parameters(:,31),'Sheet1','AE2')
-xlswrite(filename,Parameters(:,32),'Sheet1','AF2')
-xlswrite(filename,Parameters(:,33),'Sheet1','AG2')
-xlswrite(filename,Parameters(:,34),'Sheet1','AH2')
-xlswrite(filename,Parameters(:,35),'Sheet1','AI2')
-xlswrite(filename,Parameters(:,36),'Sheet1','AJ2')
-
-xlswrite(filename,Parameters(:,37),'Sheet1','AK2')
-xlswrite(filename,Parameters(:,38),'Sheet1','AL2')
-xlswrite(filename,Parameters(:,39),'Sheet1','AM2')
-xlswrite(filename,Parameters(:,40),'Sheet1','AN2')
-xlswrite(filename,Parameters(:,41),'Sheet1','AO2')
+end
+% 
+% 
+% %filename = 'Data_Method_3.xlsx';
+% filename = 'Data_Method_4.xlsx';
+% xlswrite(filename,Parameters(:,1),'Sheet1','A2')
+% xlswrite(filename,Parameters(:,2),'Sheet1','B2')
+% xlswrite(filename,Parameters(:,3),'Sheet1','C2')
+% xlswrite(filename,Parameters(:,4),'Sheet1','D2')
+% xlswrite(filename,Parameters(:,5),'Sheet1','E2')
+% xlswrite(filename,Parameters(:,6),'Sheet1','F2')
+% xlswrite(filename,Parameters(:,7),'Sheet1','G2')
+% xlswrite(filename,Parameters(:,8),'Sheet1','H2')
+% xlswrite(filename,Parameters(:,9),'Sheet1','I2')
+% xlswrite(filename,Parameters(:,10),'Sheet1','J2')
+% xlswrite(filename,Parameters(:,11),'Sheet1','K2')
+% xlswrite(filename,Parameters(:,12),'Sheet1','L2')
+% xlswrite(filename,Parameters(:,13),'Sheet1','M2')
+% xlswrite(filename,Parameters(:,14),'Sheet1','N2')
+% xlswrite(filename,Parameters(:,15),'Sheet1','O2')
+% xlswrite(filename,Parameters(:,16),'Sheet1','P2')
+% xlswrite(filename,Parameters(:,17),'Sheet1','Q2')
+% xlswrite(filename,Parameters(:,18),'Sheet1','R2')
+% 
+% xlswrite(filename,Parameters(:,19),'Sheet1','S2')
+% xlswrite(filename,Parameters(:,20),'Sheet1','T2')
+% xlswrite(filename,Parameters(:,21),'Sheet1','U2')
+% xlswrite(filename,Parameters(:,22),'Sheet1','V2')
+% xlswrite(filename,Parameters(:,23),'Sheet1','W2')
+% xlswrite(filename,Parameters(:,24),'Sheet1','X2')
+% xlswrite(filename,Parameters(:,25),'Sheet1','Y2')
+% xlswrite(filename,Parameters(:,26),'Sheet1','Z2')
+% xlswrite(filename,Parameters(:,27),'Sheet1','AA2')
+% xlswrite(filename,Parameters(:,28),'Sheet1','AB2')
+% xlswrite(filename,Parameters(:,29),'Sheet1','AC2')
+% xlswrite(filename,Parameters(:,30),'Sheet1','AD2')
+% xlswrite(filename,Parameters(:,31),'Sheet1','AE2')
+% xlswrite(filename,Parameters(:,32),'Sheet1','AF2')
+% xlswrite(filename,Parameters(:,33),'Sheet1','AG2')
+% xlswrite(filename,Parameters(:,34),'Sheet1','AH2')
+% xlswrite(filename,Parameters(:,35),'Sheet1','AI2')
+% xlswrite(filename,Parameters(:,36),'Sheet1','AJ2')
+% 
+% xlswrite(filename,Parameters(:,37),'Sheet1','AK2')
+% xlswrite(filename,Parameters(:,38),'Sheet1','AL2')
+% xlswrite(filename,Parameters(:,39),'Sheet1','AM2')
+% xlswrite(filename,Parameters(:,40),'Sheet1','AN2')
+% xlswrite(filename,Parameters(:,41),'Sheet1','AO2')
