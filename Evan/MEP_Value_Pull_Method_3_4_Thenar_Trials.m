@@ -124,7 +124,7 @@ for L = 1:length(set2) %Thenar data trials
             MCD = AVG *2.66; % MCD formula for each frame, typical mean consecutive diff formula
             SD = std(f)*2; % SD formula for each fram, typical standard Deviation formula
             TF = isnan(MCD);
-            TD = isnan(SD);
+            TD = isnan(SD);% If no frame was performed, this takes out the Nan values for MCD and SD
             if TF == 1
                 MCD = 0;
             end
@@ -163,9 +163,9 @@ else
         d = 1;
         for f = i:(i+5) % cycles through here, window of 5 for the entire waveform
             if waveform(f) < MCD
-                c(d,:) = [f,1];
+                c(d,:) = [f,1]; % if less than MCD gives 1
             else
-                c(d,:) = [f,0];
+                c(d,:) = [f,0]; % if more than MCD gives 0
             end
             B = sum(c(:,2)); % if there are 3 in the total 5, continues to identification of index and time
             d = d+1;
@@ -174,7 +174,7 @@ else
             end
         end
         if B>=3
-            break
+            break % Need to break out of loop to go onto next if statement
         else 
             B = 0;
         end
@@ -194,7 +194,7 @@ else
             end
          else
                 MCD_offset1_index = NaN; %establishes as a NaN variable 
-                MCD_offset1_time = NaN;
+                MCD_offset1_time = NaN; %% If code gets to this point, there were no additional MCD values that met the criteria
                        
          end
          

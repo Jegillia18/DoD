@@ -126,7 +126,7 @@ for L = 1:length(set2) %Thenar data trials
             MCD = AVG *2.66; % MCD formula for each frame, typical mean consecutive diff formula
             SD = std(f)*2; % SD formula for each fram, typical standard Deviation formula
             
-            TF = isnan(MCD);
+            TF = isnan(MCD); % If no frame was performed, this takes out the Nan values for MCD and SD
             TD = isnan(SD);
             if TF == 1
                 MCD = 0;
