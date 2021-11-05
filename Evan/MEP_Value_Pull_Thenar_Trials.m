@@ -105,21 +105,45 @@ clear opts
 
 time = temp_al(:,1);
 start = find(time==.015);
-MCD = temp_tv(2,1);
-SD = temp_tv(2,2);
+% MCD = temp_tv(2,1);
+% SD = temp_tv(2,2);
 
 set2 = [2 3 4 5 6 7 8 9 10 11];
 for L = 1:length(set2) %Thenar data trials
     h = set2(L);
     waveform = temp_al(:,h);
-    
-    
+    MCD = temp_al((2:101),h);
+    f = [];
+        for k = 2:100
+            Point_a = MCD(k-1,1);
+            Point_b = MCD(k,1);
+            Diff = abs(Point_a - Point_b);
+            f(k,:) = Diff;
+                 
+        end
+        
+            AVG = mean(f); 
+            MCD = AVG *2.66; % MCD formula for each frame, typical mean consecutive diff formula
+            SD = std(f)*2; % SD formula for each fram, typical standard Deviation formula
+            
+            TF = isnan(MCD);
+            TD = isnan(SD);
+            if TF == 1
+                MCD = 0;
+            end
+            if TD == 1
+                SD = 0;
+            end
+            
+            
+            
+            
     Trial = L;
     
     time = temp_al(:,1);
     start = find(time==.015);
-    MCD = temp_tv(2,1);
-    SD = temp_tv(2,2);
+%     MCD = temp_tv(2,1);
+%     SD = temp_tv(2,2);
 
 %MCD : Onset 1 
 for i = start:(length(waveform)-5)
