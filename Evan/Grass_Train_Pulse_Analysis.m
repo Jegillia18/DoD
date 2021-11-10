@@ -8,4 +8,6 @@
 
 set = []; %participant number set
 
-for y = 1:length set
+for y = 1:length(set)
+    
+end
