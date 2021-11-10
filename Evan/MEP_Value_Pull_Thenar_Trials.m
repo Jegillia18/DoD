@@ -1,5 +1,6 @@
 %% Import data from spreadsheet
 % 
+%%IMP -- imports specifically from Thenar trials 1-10 not the average
 %
 %    Method 1:
 % Onset1: 3 consecutive points above MCD
