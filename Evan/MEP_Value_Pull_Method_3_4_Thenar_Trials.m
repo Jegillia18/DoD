@@ -26,6 +26,7 @@ warning('off','all')
 for y = 1:length(set)
     p = set(y);
     MEP_Data.(['Participant_',num2str(p),]) = table();
+    
      data = sprintf('691_P%d_pre_corticalexcitability-MCD data_thenar.xlsx',p);
      
 opts = spreadsheetImportOptions("NumVariables", 12);
@@ -45,8 +46,6 @@ opts.VariableTypes = ["double","double", "double", "double", "double", "double",
 
 % Import the data
 P10precorticalexcitabilityMCDdatathenar1 = readtable(data, opts, "UseExcel", false);
-
-
 %% Clear temporary variables
 clear opts
 
@@ -72,7 +71,7 @@ P11precorticalexcitabilityMCDdatathenar = readtable(data, opts, "UseExcel", fals
 
 %% Clear temporary variables
 clear opts
- temp_al = table2array(P10precorticalexcitabilityMCDdatathenar1(2:end,:)); % A and L Columns
+ temp_al = table2array(P10precorticalexcitabilityMCDdatathenar1); % A and L Columns
  temp_tv = str2double(table2array(P11precorticalexcitabilityMCDdatathenar)); % T and V Columns
 
  %Onset_Parameters(y,:) =  temp;
@@ -145,7 +144,7 @@ for L = 1:length(set2) %Thenar data trials
 %MCD : Onset 1 
 for i = start:(length(waveform)-5)
     %Below written like: wave(1) > MCD value ----- wave(2)> MCD value
- if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD% && waveform(i+3) > MCD && waveform(i+4) > MCD % Shorten here for 3 consecutive or 5 consecutive
+ if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD % Shorten here for 3 consecutive or 5 consecutive
      MCD_onset1_index = i;
      MCD_onset1_time = time(i);
      break
@@ -210,7 +209,7 @@ if isnan(MCD_offset1_index)
     
 else
     for i = MCD_offset1_index:(length(waveform)-5)
-        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD% && waveform(i+3) > MCD && waveform(i+4) > MCD
+        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD
             MCD_onset2_index = i;
             MCD_onset2_time = time(i);
         break
@@ -280,7 +279,7 @@ if isnan(MCD_offset2_index)
 else
     if (i+5) <= length(waveform)-5 % inserted to correct error when at the end of the waveform
     for i = MCD_offset2_index:(length(waveform)-5)
-        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD% && waveform(i+3) > MCD && waveform(i+4) > MCD
+        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD
             MCD_onset3_index = i;
             MCD_onset3_time = time(i);
         break
@@ -351,7 +350,7 @@ if isnan(MCD_offset3_index)
 else
     if (i+5) <= (length(waveform)-5)
     for i = MCD_offset3_index:(length(waveform)-5)
-        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD% && waveform(i+3) > MCD && waveform(i+4) > MCD
+        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD
             MCD_onset4_index = i;
             MCD_onset4_time = time(i);
         break
@@ -421,7 +420,7 @@ if isnan(MCD_offset4_index)
 else
     if (i+5) <= (length(waveform)-5)
     for i = MCD_offset4_index:(length(waveform)-5)
-        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD% && waveform(i+3) > MCD && waveform(i+4) > MCD
+        if waveform(i) > MCD && waveform(i+1) > MCD && waveform(i+2) > MCD && waveform(i+3) > MCD && waveform(i+4) > MCD
             MCD_onset5_index = i;
             MCD_onset5_time = time(i);
         break
@@ -487,7 +486,7 @@ end
 
 %SD : Onset 1
 for i = start:(length(waveform)-5) 
- if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD% && waveform(i+3) > SD && waveform(i+4) > SD
+ if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD && waveform(i+3) > SD && waveform(i+4) > SD
      SD_onset1_index = i;
      SD_onset1_time = time(i);
      break
@@ -550,7 +549,7 @@ if isnan(SD_offset1_index)
      SD_onset2_time = NaN; 
 else
     for i = SD_offset1_index: (length(waveform)-5)
-        if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD% && waveform(i+3) > SD && waveform(i+4) > SD
+        if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD && waveform(i+3) > SD && waveform(i+4) > SD
          SD_onset2_index = i;
          SD_onset2_time = time(i);
      break
@@ -614,7 +613,7 @@ if isnan(SD_offset2_index)
      SD_onset3_time = NaN; 
 else
     for i = SD_offset2_index: (length(waveform)-5)
-        if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD% && waveform(i+3) > SD && waveform(i+4) > SD
+        if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD && waveform(i+3) > SD && waveform(i+4) > SD
          SD_onset3_index = i;
          SD_onset3_time = time(i);
      break
@@ -679,7 +678,7 @@ if isnan(SD_offset3_index)
 else
     if (i+5) <= 351-5
     for i = SD_offset3_index: (length(waveform)-5)
-        if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD% && waveform(i+3) > SD && waveform(i+4) > SD
+        if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD && waveform(i+3) > SD && waveform(i+4) > SD
          SD_onset4_index = i;
          SD_onset4_time = time(i);
      break
@@ -755,7 +754,7 @@ if isnan(SD_offset4_index)
 else
     
     for i = SD_offset4_index: (length(waveform)-5)
-        if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD% && waveform(i+3) > SD && waveform(i+4) > SD
+        if waveform(i) > SD && waveform(i+1) > SD && waveform(i+2) > SD && waveform(i+3) > SD && waveform(i+4) > SD
          SD_onset5_index = i;
          SD_onset5_time = time(i);
      break
@@ -832,12 +831,12 @@ hold on
 yline(SD,'g--');
 
 filename = sprintf('P%d_Trial%d_MEP_Plot',p,L);
-cd Plots_M3
-%cd Plots_M4
+%cd Plots_M3
+cd Plots_M4
 savefig(filename);
 close
-cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
-% %cd 'C:\Users\Jessi\Documents\DoD\Evan'
+%cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan'
+cd 'C:\Users\Jessi\Documents\DoD\Evan'
 
 
 
