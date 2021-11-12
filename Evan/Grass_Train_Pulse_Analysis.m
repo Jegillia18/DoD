@@ -22,7 +22,7 @@
         % Each file has 3 "sweeps/trials" to evaluate
         
     % Potential Naming convention
-    % P1_D1_pre 
+    % P1_D1_pre (Participant# Day # Pre/Post
     %  P1 (1:46) D1 (1:3)
     
 
