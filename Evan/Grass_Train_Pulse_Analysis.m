@@ -33,7 +33,7 @@
 %% Import data from singular pulse
 clear; clc;
 %   
-
+cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan\Spike2_GRASS'
 set = []; %participant number set
 
 
@@ -67,12 +67,16 @@ Ham_time = Trial_11_17_21_all_burst_Ham.times;
 Threshold = .30; % microVolts
 p = 1; t = 1;
 
+% The following will be made into a table once the import is corrected,
+% because right now t = 1 causing it to import into seperate matrices 
+
 %% Onset
 
 for Wv = 1:length(TA_val)
     % TA
     if TA_val(Wv) >= Threshold
         TA_onset = TA_val(Wv);
+        TA_onset_index = Wv;
         TA_onset_time = TA_time(Wv);
         ParticipantData.(['Participant_',num2str(p),]).('TA_Onset')(t,1) = TA_onset;
         ParticipantData.(['Participant_',num2str(p),]).('TA_Onset_time')(t,1) = TA_onset_time;
@@ -86,6 +90,7 @@ for Wv = 1:length(Sol_val)
     %Sol
     if Sol_val(Wv) >= Threshold
         Sol_onset = Sol_val(Wv);
+        Sol_onset_index = Wv;
         Sol_onset_time = Sol_time(Wv);
         ParticipantData.(['Participant_',num2str(p),]).('Sol_Onset')(t,1) = Sol_onset;
         ParticipantData.(['Participant_',num2str(p),]).('Sol_Onset_time')(t,1) = Sol_onset_time;
@@ -99,6 +104,7 @@ for Wv = 1:length(Ham_val)
     %Ham
     if Ham_val(Wv) >= Threshold
         Ham_onset = Ham_val(Wv);
+        Ham_onset_index = Wv;
         Ham_onset_time = Ham_time(Wv);
         ParticipantData.(['Participant_',num2str(p),]).('Ham_Onset')(t,1) = Ham_onset;
         ParticipantData.(['Participant_',num2str(p),]).('Ham_Onset_time')(t,1) = Ham_onset_time;
@@ -112,6 +118,7 @@ for Wv = 1:length(Quad_val)
     %Quad
     if Quad_val(Wv) >= Threshold
         Quad_onset = Quad_val(Wv);
+        Quad_onset_index = Wv;
         Quad_onset_time = Quad_time(Wv);
         ParticipantData.(['Participant_',num2str(p),]).('Quad_Onset')(t,1) = Quad_onset;
         ParticipantData.(['Participant_',num2str(p),]).('Quad_Onset_time')(t,1) = Quad_onset_time;
@@ -122,19 +129,70 @@ for Wv = 1:length(Quad_val)
     end
 end
 
-plot(TA_time,TA_val);
-plot(Sol_time,Sol_val);
-plot(Ham_time,Ham_val);
-plot(Quad_time,Quad_val);
+
 %% Offset
 
-%Same thing but <=
+for Wv = TA_onset_index:length(TA_val)
+    % TA
+    if TA_val(Wv) <= Threshold
+        TA_onset = TA_val(Wv);
+        TA_onset_time = TA_time(Wv);
+        ParticipantData.(['Participant_',num2str(p),]).('TA_Offset')(t,1) = TA_onset;
+        ParticipantData.(['Participant_',num2str(p),]).('TA_Offset_time')(t,1) = TA_onset_time;
+        break
+    else
+        ParticipantData.(['Participant_',num2str(p),]).('TA_Offset')(t,1) = NaN;
+        ParticipantData.(['Participant_',num2str(p),]).('TA_Offset_time')(t,1) = NaN;
+    end
+end
+for Wv = Sol_onset_index:length(Sol_val)
+    %Sol
+    if Sol_val(Wv) <= Threshold
+        Sol_onset = Sol_val(Wv);
+        Sol_onset_time = Sol_time(Wv);
+        ParticipantData.(['Participant_',num2str(p),]).('Sol_Offset')(t,1) = Sol_onset;
+        ParticipantData.(['Participant_',num2str(p),]).('Sol_Offset_time')(t,1) = Sol_onset_time;
+        break
+    else
+        ParticipantData.(['Participant_',num2str(p),]).('Sol_Offset')(t,1) = NaN;
+        ParticipantData.(['Participant_',num2str(p),]).('Sol_Offset_time')(t,1) = NaN;
+    end
+end
+for Wv = Ham_onset_index:length(Ham_val)
+    %Ham
+    if Ham_val(Wv) <= Threshold
+        Ham_onset = Ham_val(Wv);
+        Ham_onset_time = Ham_time(Wv);
+        ParticipantData.(['Participant_',num2str(p),]).('Ham_Offset')(t,1) = Ham_onset;
+        ParticipantData.(['Participant_',num2str(p),]).('Ham_Offset_time')(t,1) = Ham_onset_time;
+        break
+    else
+        ParticipantData.(['Participant_',num2str(p),]).('Ham_Offset')(t,1) = NaN;
+        ParticipantData.(['Participant_',num2str(p),]).('Ham_Offset_time')(t,1) = NaN;
+    end
+end
+for Wv = Quad_onset_index:length(Quad_val)
+    %Quad
+    if Quad_val(Wv) <= Threshold
+        Quad_onset = Quad_val(Wv);
+        Quad_onset_time = Quad_time(Wv);
+        ParticipantData.(['Participant_',num2str(p),]).('Quad_Offset')(t,1) = Quad_onset;
+        ParticipantData.(['Participant_',num2str(p),]).('Quad_Offset_time')(t,1) = Quad_onset_time;
+        break
+    else
+        ParticipantData.(['Participant_',num2str(p),]).('Quad_Offset')(t,1) = NaN;
+        ParticipantData.(['Participant_',num2str(p),]).('Quad_Offset_time')(t,1) = NaN;
+    end
+end
 
 %% Duration
 
 % Onset Val - Offset Val
 
-
+plot(TA_time,TA_val);
+plot(Sol_time,Sol_val);
+plot(Ham_time,Ham_val);
+plot(Quad_time,Quad_val);
 
 
 
