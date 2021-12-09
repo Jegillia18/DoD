@@ -7,6 +7,7 @@
     % 4 EMG Channels TA (ch.?), SOL, HAM, QUAD
     % Additional Waveform channel CED (Port 3, Sequencer channel set up
     % Channel 16)
+    % Channel 15 is the goniometer for the knee flexion
     % Channel 31 & 32 keyboard and Digital markers
     % Drop cursors based on the first waveform, secondary cursor does not
     % matter as much as long as it captures the full EMG waveform
@@ -37,7 +38,7 @@ cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan\Spike2_GRASS'
 set = []; %participant number set
 
 
-%% Import data from 5 Pulse Train
+%% Import data from Spike2
 
 for y = 1:length(set)
     p = set(y);
