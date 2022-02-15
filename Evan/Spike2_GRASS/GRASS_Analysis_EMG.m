@@ -1,16 +1,43 @@
 % Created on 02/09/2022 By Jessica Gilliam
-% Using Matlab Function for Filtering EMG Data
+% This code is for the 5 pulse train analysis [WINDUP]
 
 
 % Import Raw Code
-clear;clc;
-cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan\Spike2_GRASS'
-data = load('NIH_TSS_Sample_Data_02_08.mat');
+% clear;clc;
+% cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan\Spike2_GRASS'
+% data = load('NIH_TSS_Sample_Data_02_08.mat');
+% 
+% TA_val = data.FWR_windup_JC_lft_LE_020822_TA.values;
+% TA_time = data.FWR_windup_JC_lft_LE_020822_TA.times;
 
-TA_val = data.FWR_windup_JC_lft_LE_020822_TA.values;
-TA_time = data.FWR_windup_JC_lft_LE_020822_TA.times;
+%% Import data from Spike2
+cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan\Spike2_GRASS\Data_02_15'
+set = 1 ;%[]; %participant number set (46 total)
+for y = 1:length(set)
+    p = set(y);
+        
+    for s = 1:3 %session number (1, 2, 3)
+        
+        ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]) = table();
+        
+        for t = 1:3 
+                        
+            data = load(sprintf('P%d_S%d_T%d_WindUp',p,s,t));
+            
+        
+    
+
 
 %%
+
+%% Needs updates here - need to filter each code and have time data
+Ham_val = data.FWR_windup_ES_lft_LE_021522_Ham.values;
+Quad_val = data.FWR_windup_ES_lft_LE_021522_Quad.values;
+
+
+
+
+
 
 % Lowpass filter 500Hz
 Freq = 2000;
@@ -385,5 +412,12 @@ try AUC_SUM = AUC1 + AUC2 + AUC3 + AUC4 + AUC5;
 catch AUC_SUM = NaN;
 end
 
+%% Data Management 
 
+
+
+
+        end
+    end
+end
 
