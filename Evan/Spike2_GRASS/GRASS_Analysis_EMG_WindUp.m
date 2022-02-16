@@ -29,14 +29,9 @@ for y = 1:length(set)
             data = load(sprintf('P%d_S%d_T%d_WindUp',p,s,t));
             
         
-    
-
-
-%%
-
 %% Variable Set - Up
 
-% NEED TO CHANGE BELOW
+% NEED TO CHANGE BELOW - Don't export with full name
 Ham_val = data.FWR_windup_ES_lft_LE_021522_Ham.values;
 Quad_val = data.FWR_windup_ES_lft_LE_021522_Quad.values;
 TA_val = data.FWR_windup_ES_lft_LE_021522_TA.values;
