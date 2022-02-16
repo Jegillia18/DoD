@@ -1381,9 +1381,101 @@ end
 
 %% Data Management 
 
+% Onset EMG 1
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Onset 1')(s,1) = TA_onset_EMG1_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Onset 1')(s,1) = Sol_onset_EMG1_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Onset 1')(s,1) = Ham_onset_EMG1_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Onset 1')(s,1) = Quad_onset_EMG1_time;
 
+% Offset EMG 1
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Offset 1')(s,1) = TA_offset_EMG1_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Offset 1')(s,1) = Sol_offset_EMG1_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Offset 1')(s,1) = Ham_offset_EMG1_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Offset 1')(s,1) = Quad_offset_EMG1_time;
 
+%Onset EMG 2
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Onset 2')(s,1) = TA_onset_EMG2_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Onset 2')(s,1) = Sol_onset_EMG2_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Onset 2')(s,1) = Ham_onset_EMG2_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Onset 2')(s,1) = Quad_onset_EMG2_time;
 
+% Offset EMG 2
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Offset 2')(s,1) = TA_offset_EMG2_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Offset 2')(s,1) = Sol_offset_EMG2_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Offset 2')(s,1) = Ham_offset_EMG2_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Offset 2')(s,1) = Quad_offset_EMG2_time;
+
+%Onset EMG 3
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Onset 3')(s,1) = TA_onset_EMG3_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Onset 3')(s,1) = Sol_onset_EMG3_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Onset 3')(s,1) = Ham_onset_EMG3_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Onset 3')(s,1) = Quad_onset_EMG3_time;
+
+% Offset EMG 3
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Offset 3')(s,1) = TA_offset_EMG3_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Offset 3')(s,1) = Sol_offset_EMG3_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Offset 3')(s,1) = Ham_offset_EMG3_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Offset 3')(s,1) = Quad_offset_EMG3_time;
+
+%Onset EMG 4
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Onset 4')(s,1) = TA_onset_EMG4_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Onset 4')(s,1) = Sol_onset_EMG4_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Onset 4')(s,1) = Ham_onset_EMG4_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Onset 4')(s,1) = Quad_onset_EMG4_time;
+
+% Offset EMG 4
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Offset 4')(s,1) = TA_offset_EMG4_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Offset 4')(s,1) = Sol_offset_EMG4_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Offset 4')(s,1) = Ham_offset_EMG4_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Offset 4')(s,1) = Quad_offset_EMG4_time;
+
+%Onset EMG 5
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Onset 5')(s,1) = TA_onset_EMG5_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Onset 5')(s,1) = Sol_onset_EMG5_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Onset 5')(s,1) = Ham_onset_EMG5_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Onset 5')(s,1) = Quad_onset_EMG5_time;
+
+% Offset EMG 5
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('Offset 5')(s,1) = TA_offset_EMG5_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('Offset 5')(s,1) = Sol_offset_EMG5_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('Offset 5')(s,1) = Ham_offset_EMG5_time;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('Offset 5')(s,1) = Quad_offset_EMG5_time;
+
+% AUC EMG 1
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('AUC 1')(s,1) = TA_AUC1;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('AUC 1')(s,1) = Sol_AUC1;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('AUC 1')(s,1) = Ham_AUC1;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('AUC 1')(s,1) = Quad_AUC1;
+
+% AUC EMG 2
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('AUC 2')(s,1) = TA_AUC2;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('AUC 2')(s,1) = Sol_AUC2;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('AUC 2')(s,1) = Ham_AUC2;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('AUC 2')(s,1) = Quad_AUC2;
+
+%AUC EMG 3
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('AUC 3')(s,1) = TA_AUC3;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('AUC 3')(s,1) = Sol_AUC3;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('AUC 3')(s,1) = Ham_AUC3;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('AUC 3')(s,1) = Quad_AUC3;
+
+%AUC EMG 4
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('AUC 4')(s,1) = TA_AUC4;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('AUC 4')(s,1) = Sol_AUC4;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('AUC 4')(s,1) = Ham_AUC4;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('AUC 4')(s,1) = Quad_AUC4;
+
+%AUC EMG 5
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('AUC 5')(s,1) = TA_AUC5;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('AUC 5')(s,1) = Sol_AUC5;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('AUC 5')(s,1) = Ham_AUC5;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('AUC 5')(s,1) = Quad_AUC5;
+
+%AUC SUM
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).TA.('AUC SUM')(s,1) = TA_AUC_SUM;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Sol.('AUC SUM')(s,1) = Sol_AUC_SUM;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Ham.('AUC SUM')(s,1) = Ham_AUC_SUM;
+ParticipantData.(['Participant_',num2str(p),]).(['Session_', num2str(s),]).Quad.('AUC SUM')(s,1) = Quad_AUC_SUM;
         end
     end
 end
