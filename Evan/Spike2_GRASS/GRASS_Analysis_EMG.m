@@ -1,6 +1,6 @@
 % Created on 02/09/2022 By Jessica Gilliam
 % This code is for the 5 pulse train analysis 
-% [WINDUP]
+%% [WINDUP]
 
 % Import Raw Code
 % clear;clc;
@@ -11,7 +11,7 @@
 % TA_time = data.FWR_windup_JC_lft_LE_020822_TA.times;
 
 %% Import data from Spike2
-cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan\Spike2_GRASS\Data_02_15'
+%cd 'C:\Users\jg300416\Documents\MATLAB\DoD\Evan\Spike2_GRASS\Data_02_15'
 set = 1 ;%[]; %participant number set (46 total)
 for y = 1:length(set)
     p = set(y);
@@ -1477,9 +1477,9 @@ end
 
 clearvars -except ParticipantData
 
-%%
+%% [NOXAMP]
 % This code is for the single pulse analysis 
-% [NoxAmp]
+% 
 
 
 %% Import data from Spike2
